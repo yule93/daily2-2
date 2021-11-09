@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데일리과제2-2</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./centerList.js"></script>
+    <style>
+        table {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+        td {
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>코로나19 예방접종센터 목록</h2>
+        <table>
+            <colgroup>
+                <col width="50px"/>
+                <col width="350px"/>
+                <col width="200px"/>
+                <col width="200px"/>
+            </colgroup>
+            <tr>
+                <th>번호</th>
+                <th>센터명</th>
+                <th>생성일</th>
+                <th>수정일</th>
+            </tr>
+            <tr v-for="(center, index) in centerList" :key="index">
+                <td>{{ center.zipCode }}</td>
+                <td style ="text-align: left;">
+                    <a v-bind:href="'detail.html?zip=' + center.zipCode">{{ center.centerName }}</a>
+                </td>
+                <td>{{ center.createdAt }}</td>
+                <td>{{ center.updatedAt }}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script type="module">
+    new Vue({
+        el:"#app",
+        data() {
+            return {
+                centerList: [],
+            };
+        },
+        created() {
+            this.centerList = centerList.data;
+        },
+    });
+</script>
+</html>
